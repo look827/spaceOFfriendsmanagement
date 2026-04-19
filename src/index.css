@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Sleek Professional Theme Colors */
+  --color-bg-deep: #0a0f1d;
+  --color-bg-surface: #161c2d;
+  --color-blue-primary: #1e40af;
+  --color-gold-accent: #c5a028;
+  --color-orange-action: #f97316;
+  --color-text-main: #ffffff;
+  --color-text-dim: #94a3b8;
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  
+  --color-gold: #c5a028;
+  --color-navy: #0a0f1d;
+  --color-navy-light: #161c2d;
+  --color-org: #f97316;
+}
+
+@layer base {
+  body {
+    @apply bg-bg-deep text-text-main font-sans selection:bg-gold/30 selection:text-gold;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-bg-deep;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-white/10 rounded-full hover:bg-gold/30 transition-colors;
+  }
+}
+
+.sleek-card {
+  @apply bg-bg-surface border border-border-subtle rounded-xl p-6 shadow-lg;
+}
+
+.gold-gradient {
+  background: linear-gradient(135deg, #c5a028 0%, #e2c058 50%, #9a7d1f 100%);
+}
+
+.navy-gradient {
+  background: linear-gradient(135deg, #0a101f 0%, #161c2d 100%);
+}
+
+.status-active {
+  background: rgba(30, 64, 175, 0.2);
+  color: #60a5fa;
+  @apply border border-blue-primary/30;
+}
+
+.status-pending {
+  background: rgba(249, 115, 22, 0.15);
+  color: #fb923c;
+  @apply border border-orange-action/30;
+}
+
+.input-focus {
+  @apply focus:ring-1 focus:ring-blue-primary/50 focus:border-blue-primary/50 outline-none transition-all;
+}
+
+

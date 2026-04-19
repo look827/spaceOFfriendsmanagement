@@ -1,0 +1,117 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "System users with predefined roles",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "name": { "type": "string" },
+        "role": { "type": "string", "enum": ["CEO", "COO", "Head of Science"] }
+      },
+      "required": ["uid", "email", "name", "role"]
+    },
+    "Project": {
+      "title": "Project",
+      "description": "High-level projects created by the CEO",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "status": { "type": "string", "enum": ["Backlog", "In Progress", "Review", "Completed"] },
+        "deadline": { "type": "string", "format": "date-time" },
+        "createdBy": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "status", "createdBy", "createdAt"]
+    },
+    "Task": {
+      "title": "Task",
+      "description": "Specific tasks within a project or standalone assigned to employees",
+      "type": "object",
+      "properties": {
+        "projectId": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "status": { "type": "string", "enum": ["Pending", "In Progress", "Done"] },
+        "assignedTo": { "type": "string" },
+        "deadline": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "status", "assignedTo", "createdAt"]
+    },
+    "LeaveRequest": {
+      "title": "LeaveRequest",
+      "description": "Employee leave applications (sick, etc.)",
+      "type": "object",
+      "properties": {
+        "employeeId": { "type": "string" },
+        "employeeName": { "type": "string" },
+        "type": { "type": "string", "enum": ["Sick Leave", "Casual Leave", "Other"] },
+        "reason": { "type": "string" },
+        "startDate": { "type": "string", "format": "date-time" },
+        "endDate": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["Pending", "Approved", "Rejected"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["employeeId", "type", "startDate", "endDate", "status", "createdAt"]
+    },
+    "AccountingRecord": {
+      "title": "AccountingRecord",
+      "description": "Financial or accounting related entries",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "amount": { "type": "number" },
+        "type": { "type": "string", "enum": ["Credit", "Debit"] },
+        "date": { "type": "string", "format": "date-time" },
+        "employeeId": { "type": "string" },
+        "status": { "type": "string", "enum": ["Pending", "Verified"] },
+        "description": { "type": "string" }
+      },
+      "required": ["title", "amount", "type", "date", "status"]
+    },
+    "Asset": {
+      "title": "Asset",
+      "description": "Technical research assets (.obj, .blend)",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "size": { "type": "number" },
+        "url": { "type": "string" },
+        "uploadedBy": { "type": "string" },
+        "uploaderName": { "type": "string" },
+        "uploadedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "url", "uploadedBy", "uploadedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/projects/{projectId}": {
+      "schema": "Project",
+      "description": "Organization projects"
+    },
+    "/tasks/{taskId}": {
+      "schema": "Task",
+      "description": "Individual assigned tasks"
+    },
+    "/leave_requests/{requestId}": {
+      "schema": "LeaveRequest",
+      "description": "Leave applications"
+    },
+    "/accounting/{recordId}": {
+      "schema": "AccountingRecord",
+      "description": "Accounting entries"
+    },
+    "/assets/{assetId}": {
+      "schema": "Asset",
+      "description": "Technical assets"
+    }
+  }
+}
